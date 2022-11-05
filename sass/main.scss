@@ -1,0 +1,332 @@
+@import 'config';
+
+html{
+    height: 100%;
+    body{
+    padding: 0;
+    margin: 0;
+    margin-top: -2.4%;
+    font-family: 'Barlow Semi Condensed';
+    background:radial-gradient(farthest-side at 50% 10%, $radial-gradient1, $radial-gradient2);
+    color: white;
+    display: flex;
+    scale: 0.9;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    gap: 10%;
+    height:100%;
+}
+}
+.textcontainer{
+    margin-top: 5%;
+    height: 100px;
+    display: grid;
+    border: 2px hsl(217, 16%, 45%) solid;
+    grid-template-columns: 1fr 0.2fr;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+    background: transparent;
+    border-radius: 10px;
+    width: 500px;
+    align-items: center;
+
+    .score{
+        text-align: center;
+        max-height: 100px;
+        max-width: 70px;
+        background-color: rgb(244, 242, 242);
+        border-radius: inherit;
+        padding: 3px 40px 3px 40px;
+        div{
+            letter-spacing: 3px;
+            color: $score-text;
+        }
+        h1{
+            font-size: 90px;
+            font-weight: 900;
+            color: $dark-text;
+            margin-top: -20px;
+        }
+    }
+}
+.game{
+    // scale: 0;
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    .scissor{
+        // visibility: hidden;
+        z-index: 999;
+        width: 80px;
+        height: 80px;
+        padding: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 30px transparent solid;
+        background: linear-gradient(
+            to top,
+            hsl(39, 89%, 49%),
+            hsl(40, 84%, 53%)
+        );
+        .innercircle{
+        width: 80px;
+        height: 55px;
+        padding: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: white;
+        box-shadow: inset 0px 6px rgba(128, 128, 128, 0.459);
+        }
+    grid-row: -3/-2;
+    grid-column: 3/4;
+    }
+
+    .rock{
+    @extend .scissor;
+    background: linear-gradient(
+            to top,
+            hsl(349, 71%, 52%),
+            hsl(349, 70%, 56%)
+        );
+    grid-row: -2/-1;
+    grid-column: -3/-2;
+    }
+    .paper{
+        @extend .scissor;
+        background: linear-gradient(
+            to top,
+            hsl(230, 89%, 62%),
+            hsl(230, 89%, 65%)
+        );
+    grid-row: 1/2;
+    grid-column: 1/2;
+    }
+    .house{
+        // transform: scale(0);
+        visibility: hidden;
+        @extend .scissor;
+        cursor:default;
+        z-index: -999;
+        background: black;
+    }
+    .line1{
+        // visibility: hidden;
+        position: absolute;
+        background-color: rgb(21, 24, 53);
+        width: 130px;
+        height: 15px;
+        top: 96px;
+        left: 178px;
+        z-index: -999;
+
+    }
+    .line2{
+        @extend .line1;
+        top: 197px;
+        left: 206px;
+        rotate: 121deg;
+        z-index: -999;
+    }
+    .line3{
+        @extend .line1;
+        top: 151px;
+        left: 120px;
+        rotate: -121deg;
+        z-index: -999;
+    }
+    svg{
+        transform: scale(1.4, 1.4);
+    }
+}
+.rules{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 7px;
+    padding: 30px auto;
+    width: 100px;
+    right: -40px;
+    bottom: -40px;
+    font-weight: lighter;
+    height: 34px;
+    vertical-align: center;
+    cursor: pointer;
+    border: 1px white solid;
+}
+.rulespopup{
+    position: absolute;
+    scale: 0;
+    margin-top: 5%;
+    background: white;
+    color: $dark-text;
+    display: grid;
+    grid-template-columns: 1fr 0.1fr;
+    height: 70%;
+    border-radius: 8px;
+    padding: 0% 2%;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+
+    .hmm{
+        grid-column: span 2;
+    }
+    .cross{
+        cursor: pointer;
+    }
+    h3{
+    padding-left: 10%;}
+}
+.game2{
+
+    column-gap: 80px;
+}
+.textarea{
+   grid-row: 2/3;
+   grid-column: 2/3;
+   transform: translateY(-40px);
+   padding-left: 40%;
+   width: 130px;
+   font-weight: bolder;
+   font-size: 30px;
+   visibility: hidden;
+   height: 100px;
+   z-index: 999;
+}
+button{
+    padding: 0;
+    position: absolute;
+    height: 30px;
+    top: 55%;
+    left: 45%;
+    // transform: translateY(220px) translateX(270px);
+    padding: 20px 30px;
+    line-height: 0px;
+    letter-spacing: 1.3px;
+    color: $score-text;
+    font-size: 14px;
+    border: none;
+    background-color: aliceblue;
+    visibility: hidden;
+    cursor: pointer;
+    border-radius: 8px;
+    z-index: 999;
+}
+.scissor2, .paper2, .rock2{
+    visibility: visible !important;
+    transform: scale(1.4);
+    position: absolute;
+    top: 100px;
+    grid-row: 1/2 !important;
+    grid-column: 1/2 !important;
+    &::before{
+        content: "YOU PICKED";
+        position: absolute;
+        bottom: 200px;
+        font-size: 20px;
+    }
+   
+}
+
+.house2{
+    transform: translateY(90px) scale(1.1);
+    visibility: visible !important;
+    grid-row: -3/-2 !important;
+    grid-column: 3/4 !important;
+    position: relative;
+    &::before{
+        content: "THE HOUSE PICKED";
+        position: absolute;
+        font-weight: bolder;
+        bottom: 225px;
+        right: -30px;
+        width: 200px;
+        font-size: 25px;
+    }
+}
+.linehide{
+    visibility: hidden !important;
+}
+.op{
+    visibility : visible !important;
+    grid-column : 3/4 !important;
+    position : absolute !important;
+    top : 100px !important;
+    transform : scale(1.2) !important;
+    grid-row : -3/-2 !important;
+}
+.back{
+    visibility: visible !important;
+}
+.gradie::after{
+    // visibility: hidden;
+    position: absolute;
+    content: " ";
+    border-radius: 50%;
+    width: 300px ;
+    height: 300px;
+    background: radial-gradient( rgba(229, 0, 0, 0) 30%, rgba(173, 216, 230, 0) 30%, rgba(24, 122, 154, 0.559) 50%, rgb(14, 170, 222) 60%, $cyan1 70%, $cyan2 90%) !important;
+    z-index: -99999 !important;
+}
+@media screen and (max-width: 792px) {
+    html{
+        body{
+            overflow: hidden;
+        }
+    }
+    .textcontainer{
+        width: 80%;
+    }
+   .game{
+    transform: scale(0.9, 0.9);
+    justify-content: left;
+    align-items: top;
+    margin-left: 50%;
+    margin-right: 62%;
+   }.game2{
+    column-gap: 30px;
+    transform: scale(0.8, 0.8);
+   }
+   .rules{
+    left: auto;
+    right: auto;
+   }
+   .rulespopup{
+    height: 370px;
+   }
+   button{
+    position: absolute;
+    top: 140%;
+    left: 120px;
+   }
+   .textarea{
+    transform: translate(45px, 300px);
+   }
+}
+@media screen and (max-width: 400px) {
+    html{
+        body{
+            margin-top: -20%;
+        }
+    }
+    .textcontainer{
+        width: 90%;
+    }
+   .game{
+    transform: scale(0.8, 0.8);
+   }
+   .rules{
+    left: auto;
+    right: auto;
+   }
+}
